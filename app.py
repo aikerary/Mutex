@@ -18,7 +18,7 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 # define route for POST request
-@app.route('/', methods=['POST'])
+@app.route('/data', methods=['POST'])
 def get_data():
     # get data from request
     data = request.get_json()
