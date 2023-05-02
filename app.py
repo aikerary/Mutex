@@ -20,8 +20,12 @@ def get_data():
     cursor = conn.cursor()
     # get data from request
     data = request.get_json()
-    column_name = data['column']
-    num_rows = data['rows']
+    first = data['first']
+    second = data['second']
+    upper = data['upper']
+    lower = data['lower']
+    column_name = data['column_name']
+    num_rows = data['num_rows']
     
     # execute SQL query to get column data
     tabla = "olympic"
