@@ -6,20 +6,18 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-# establish connection to database
-conn = psycopg2.connect(
+# define route for POST request
+@app.route('/data', methods=['POST'])
+def get_data():
+    # establish connection to database
+    conn = psycopg2.connect(
      host="dpg-ch5bsu1jvhts7knifekg-a.oregon-postgres.render.com",
      database="mutexdatabase",
      user="mutexdatabase_user",
      password="fjIWP0PAHvHQJWAmkOdFMLpiT6CM9X9p"
-)
-
-# create a cursor
-cursor = conn.cursor()
-
-# define route for POST request
-@app.route('/data', methods=['POST'])
-def get_data():
+    )
+    # create a cursor
+    cursor = conn.cursor()
     # get data from request
     data = request.get_json()
     column_name = data['column']
