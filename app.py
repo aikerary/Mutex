@@ -31,7 +31,7 @@ def get_data():
     num_rows = data['num_rows']
     equals={"medal":"l0", "team":"l1", "country":"l2", "sport":"l3", "year":"l4"}
     queries={
-    equals["country"]+equals["sport"]+"_M": "SELECT sport, COUNT(DISTINCT country_noc) AS countries FROM men_events GROUP BY sport ORDER BY countries DESC;",
+    equals["country"]+equals["sport"]+"_M": "SELECT sport, COUNT(DISTINCT country_noc) AS countries FROM men_events GROUP BY sport ORDER BY countries DESC LIMIT 10;",
     equals["country"]+equals["sport"]+"_F": "SELECT sport, COUNT(DISTINCT country_noc) AS countries FROM women_events GROUP BY sport ORDER BY countries DESC",
     equals["sport"]+equals["country"]+"_M": "SELECT country_noc, COUNT(DISTINCT sport) AS sports_played FROM men_events GROUP BY country_noc ORDER BY sports_played DESC",
     equals["sport"]+equals["country"]+"_F": "SELECT country_noc, COUNT(DISTINCT sport) AS sports_played FROM women_events GROUP BY country_noc ORDER BY sports_played DESC",
