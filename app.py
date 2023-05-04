@@ -81,19 +81,11 @@ def get_data():
     results = cursor.fetchall()
     json_results = []
     for row in results:
-    # Crear un diccionario vacío para esta fila
         row_dict = {}
-
-    # Iterar sobre cada columna de la fila
         for idx, col in enumerate(row):
-            # Obtener el nombre de la columna actual
-            col_name = results.description[idx][0]
-
-            # Agregar el valor de la columna al diccionario
+            col_name = f"Column{idx}"
             row_dict[col_name] = col
-
-        # Agregar el diccionario de fila al resultado JSON
-        json_results.append(row_dict)
+            json_results.append(row_dict)
 
     # close cursor and connection
     cursor.close()
