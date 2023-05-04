@@ -74,25 +74,34 @@ def get_data():
     }
     
     # execute SQL query to get column data
-    tabla = "women_events"
     cursor.execute(queries["l2l3_M"])
     
     # fetch all rows
     results = cursor.fetchall()
+    # Obtener los nombres de las columnas
+    column_names = [desc[0] for desc in cursor.description]
+
+# Crear una lista de diccionarios, cada uno representa una fila de resultados
     json_results = []
     for row in results:
         row_dict = {}
         for idx, col in enumerate(row):
-            col_name = f"Column{idx}"
+            col_name = column_names[idx]
             row_dict[col_name] = col
-            json_results.append(row_dict)
+        json_results.append(row_dict)
+
+# Crear un diccionario con el encabezado de la tabla y la lista de resultados
+    json_data = {
+    "header": column_names,
+    "rows": json_results
+    }
 
     # close cursor and connection
     cursor.close()
     conn.close()
 
     # return JSON data
-    return jsonify(json_results)
+    return jsonify(json_data)
 
 if __name__ == '__main__':
     # App run on port 5000
