@@ -71,8 +71,8 @@ def get_data():
     equals["team"]+equals["medal"]+"_M": "SELECT \"isTeamSport\", medal, COUNT(CASE WHEN medal = 'Gold' AND \"isTeamSport\" = 'True' THEN 1 END) AS gold_team, COUNT(CASE WHEN medal = 'Silver' AND \"isTeamSport\" = 'True' THEN 1 END) AS silver_team, COUNT(CASE WHEN medal = 'Bronze' AND \"isTeamSport\" = 'True' THEN 1 END) AS bronze_team, COUNT(CASE WHEN medal = 'Gold' AND \"isTeamSport\" = 'False' THEN 1 END) AS gold_individual, COUNT(CASE WHEN medal = 'Silver' AND \"isTeamSport\" = 'False' THEN 1 END) AS silver_individual, COUNT(CASE WHEN medal = 'Bronze' AND \"isTeamSport\" = 'False' THEN 1 END) AS bronze_individual FROM men_events WHERE medal IS NOT NULL AND \"isTeamSport\" IS NOT NULL GROUP BY \"isTeamSport\", medal ORDER BY medal",
     equals["team"]+equals["medal"]+"_F": "SELECT \"isTeamSport\", medal, COUNT(CASE WHEN medal = 'Gold' AND \"isTeamSport\" = 'True' THEN 1 END) AS gold_team, COUNT(CASE WHEN medal = 'Silver' AND \"isTeamSport\" = 'True' THEN 1 END) AS silver_team, COUNT(CASE WHEN medal = 'Bronze' AND \"isTeamSport\" = 'True' THEN 1 END) AS bronze_team, COUNT(CASE WHEN medal = 'Gold' AND \"isTeamSport\" = 'False' THEN 1 END) AS gold_individual, COUNT(CASE WHEN medal = 'Silver' AND \"isTeamSport\" = 'False' THEN 1 END) AS silver_individual, COUNT(CASE WHEN medal = 'Bronze' AND \"isTeamSport\" = 'False' THEN 1 END) AS bronze_individual FROM women_events WHERE medal IS NOT NULL AND \"isTeamSport\" IS NOT NULL GROUP BY \"isTeamSport\", medal ORDER BY medal"
     }
-    limit= upper-lower+1
-    offset= lower-1
+    limit= int(upper)-int(lower)+1
+    offset= int(lower)-1
     # execute SQL query to get column data
     cursor.execute(queries[first+second+gender]+f" LIMIT {limit} OFFSET {offset};")
     
