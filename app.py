@@ -39,9 +39,9 @@ def get_data():
     equals["country"]+equals["year"]+"_F": "SELECT country_noc, COUNT(DISTINCT edition) AS years_participated FROM women_events GROUP BY country_noc ORDER BY years_participated DESC",
     equals["year"]+equals["country"]+"_M": "SELECT edition, COUNT(DISTINCT country_noc) AS num_countries FROM men_events GROUP BY edition ORDER BY edition ASC",
     equals["year"]+equals["country"]+"_F": "SELECT edition, COUNT(DISTINCT country_noc) AS num_countries FROM women_events GROUP BY edition ORDER BY edition ASC",
-    equals["country"]+equals["medal"]+"_M": "SELECT medal, COUNT(DISTINCT country_noc) AS countries FROM men_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY medal ORDER BY CASE medal WHEN 'Gold' THEN 1 WHEN 'Silver' THEN 2 WHEN 'Bronze' THEN 3 END LIMIT 10;",
+    equals["country"]+equals["medal"]+"_M": "SELECT medal, COUNT(DISTINCT country_noc) AS countries FROM men_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY medal ORDER BY CASE medal WHEN 'Gold' THEN 1 WHEN 'Silver' THEN 2 WHEN 'Bronze' THEN 3 END",
     equals["country"]+equals["medal"]+"_F": "SELECT medal, COUNT(DISTINCT country_noc) AS countries FROM women_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY medal ORDER BY CASE medal WHEN 'Gold' THEN 1 WHEN 'Silver' THEN 2 WHEN 'Bronze' THEN 3 END",
-    equals["medal"]+equals["country"]+"_M": "SELECT country_noc, COUNT(CASE WHEN medal = 'Gold' THEN 1 ELSE NULL END) AS gold_medals, COUNT(CASE WHEN medal = 'Silver' THEN 1 ELSE NULL END) AS silver_medals, COUNT(CASE WHEN medal = 'Bronze' THEN 1 ELSE NULL END) AS bronze_medals FROM men_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY country_noc ORDER BY gold_medals DESC, silver_medals DESC, bronze_medals DESC",
+    equals["medal"]+equals["country"]+"_M": "SELECT country_noc, COUNT(CASE WHEN medal = 'Gold' THEN 1 ELSE NULL END) AS gold_medals, COUNT(CASE WHEN medal = 'Silver' THEN 1 ELSE NULL END) AS silver_medals, COUNT(CASE WHEN medal = 'Bronze' THEN 1 ELSE NULL END) AS bronze_medals FROM men_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY country_noc ORDER BY gold_medals DESC, silver_medals DESC, bronze_medals DESC LIMIT 10;",
     equals["medal"]+equals["country"]+"_F": "SELECT country_noc, COUNT(CASE WHEN medal = 'Gold' THEN 1 ELSE NULL END) AS gold_medals, COUNT(CASE WHEN medal = 'Silver' THEN 1 ELSE NULL END) AS silver_medals, COUNT(CASE WHEN medal = 'Bronze' THEN 1 ELSE NULL END) AS bronze_medals FROM women_events WHERE medal IN ('Gold', 'Silver', 'Bronze') GROUP BY country_noc ORDER BY gold_medals DESC, silver_medals DESC, bronze_medals DESC",
     equals["country"]+equals["team"]+"_M": "SELECT country_noc, SUM(CASE WHEN \"isTeamSport\" = 'True' THEN 1 ELSE 0 END) AS num_team_events FROM men_events GROUP BY country_noc ORDER BY num_team_events DESC",
     equals["country"]+equals["team"]+"_F": "SELECT country_noc, SUM(CASE WHEN “isTeamSport” = 'True' THEN 1 ELSE 0 END) AS num_team_events FROM women_events GROUP BY country_noc ORDER BY num_team_events DESC",
@@ -74,7 +74,7 @@ def get_data():
     }
     
     # execute SQL query to get column data
-    cursor.execute(queries["l2l0_M"])
+    cursor.execute(queries["l0l2_M"])
     
     # fetch all rows
     results = cursor.fetchall()
