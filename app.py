@@ -28,7 +28,7 @@ def get_data():
     upper = data['upper']
     lower = data['lower']
     gender= data['gender']
-    equals={"medal":"l0", "team":"l1", "country":"l2", "sport":"l3", "year":"l4"}
+    equals={"medal":"li0", "team":"li1", "country":"li2", "sport":"li3", "year":"li4"}
     queries={
     equals["country"]+equals["sport"]+"_M": "SELECT sport, COUNT(DISTINCT country_noc) AS countries FROM men_events GROUP BY sport ORDER BY countries DESC",
     equals["country"]+equals["sport"]+"_F": "SELECT sport, COUNT(DISTINCT country_noc) AS countries FROM women_events GROUP BY sport ORDER BY countries DESC",
