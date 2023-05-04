@@ -78,13 +78,8 @@ def get_data():
     
     # fetch all rows
     results = cursor.fetchall()
-# Obtener los nombres de las columnas
+    # Obtener los nombres de las columnas
     column_names = [desc[0] for desc in cursor.description]
-
-# Ordenar la lista de columnas según si contiene cadenas o no
-    str_columns = [col for col in column_names if isinstance(results[0][column_names.index(col)], str)]
-    num_columns = [col for col in column_names if col not in str_columns]
-    sorted_column_names = str_columns + num_columns
 
 # Crear una lista de diccionarios, cada uno representa una fila de resultados
     json_results = []
@@ -97,10 +92,9 @@ def get_data():
 
 # Crear un diccionario con el encabezado de la tabla y la lista de resultados
     json_data = {
-    "header": sorted_column_names,
+    "header": column_names,
     "rows": json_results
     }
-
 
     # close cursor and connection
     cursor.close()
