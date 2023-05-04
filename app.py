@@ -18,6 +18,9 @@ def get_data():
     )
     # create a cursor
     cursor = conn.cursor()
+    # Create temporary tables
+    cursor.execute("CREATE TEMPORARY TABLE men_events AS SELECT * FROM olympic WHERE event LIKE '%Men%'")
+    cursor.execute("CREATE TEMPORARY TABLE women_events AS SELECT * FROM olympic WHERE event LIKE '%Women%'")
     # get data from request
     data = request.get_json()
     first = data['first']
@@ -28,7 +31,7 @@ def get_data():
     num_rows = data['num_rows']
     
     # execute SQL query to get column data
-    tabla = "olympic"
+    tabla = "women_events"
     cursor.execute(f"SELECT {column_name} FROM {tabla} LIMIT {num_rows}")
 
     # fetch all rows
